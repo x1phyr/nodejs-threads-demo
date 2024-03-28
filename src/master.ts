@@ -1,12 +1,11 @@
 import { Thread, Worker, spawn } from "threads";
 
 async function main() {
-    const add = await spawn(new Worker("./workers/add"));
-    const sum = await add(2, 3);
-
-    console.log(`2 + 3 = ${sum}`);
-
-    await Thread.terminate(add);
+    const fetchGithubProfile = await spawn(new Worker("./workers/fetch-github-profile"))
+    const x1phyr = await fetchGithubProfile("x1phyr");
+    console.log(`User "andywer" has signed up on ${new Date(x1phyr.created_at).toLocaleString()}`);
+    console.log(x1phyr);
+    await Thread.terminate(fetchGithubProfile);
 }
 
 main().catch(console.error);
