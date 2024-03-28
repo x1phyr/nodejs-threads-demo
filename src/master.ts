@@ -1,12 +1,9 @@
 import { Thread, Worker, spawn } from "threads";
 
 async function main() {
-    const add = await spawn(new Worker("./workers/add"));
-    const sum = await add(2, 3);
-
-    console.log(`2 + 3 = ${sum}`);
-
-    await Thread.terminate(add);
+    const counter = await spawn(new Worker("./workers/counter"))
+    counter().subscribe(newCount => console.log(`Counter incremented to:`, newCount));
+    // await Thread.terminate(counter);
 }
 
 main().catch(console.error);
