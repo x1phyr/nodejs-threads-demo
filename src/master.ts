@@ -1,11 +1,13 @@
 import { Thread, Worker, spawn } from "threads";
 
 async function main() {
-    const fetchGithubProfile = await spawn(new Worker("./workers/fetch-github-profile"))
-    const x1phyr = await fetchGithubProfile("x1phyr");
-    console.log(`User "andywer" has signed up on ${new Date(x1phyr.created_at).toLocaleString()}`);
-    console.log(x1phyr);
-    await Thread.terminate(fetchGithubProfile);
+    const counter = await spawn(new Worker("./workers/counter"));
+    await counter.increment();
+    await counter.increment();
+    await counter.decrement();
+
+    console.log(`Counter is now at ${await counter.getCount()}`);
+    await Thread.terminate(counter);
 }
 
 main().catch(console.error);
