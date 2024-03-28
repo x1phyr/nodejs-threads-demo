@@ -1,0 +1,18 @@
+{
+  "name": "nodejs-threads-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node src/master.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "threads": "^1.7.0",
+    "tiny-worker": "^2.3.0",
+    "ts-node": "^10.9.2"
+  }
+}
